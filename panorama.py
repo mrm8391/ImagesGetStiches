@@ -13,8 +13,8 @@ class Stitcher:
 		# unpack the images, then detect keypoints and extract
 		# local invariant descriptors from them
 		(imageB, imageA) = images
-		imageB = self.padImage(imageB, imageB.shape[0])
-		imageA = self.padImage(imageA, imageA.shape[0])
+		imageB = self.padImage(imageB, max(imageA.shape[0],imageA.shape[1]))
+		imageA = self.padImage(imageA, max(imageB.shape[0],imageB.shape[1]))
 		
 		(kpsA, featuresA) = self.detectAndDescribe(imageA)
 		(kpsB, featuresB) = self.detectAndDescribe(imageB)
@@ -32,14 +32,11 @@ class Stitcher:
 		# together
 		(matches, H, status) = M
 		result = cv2.warpPerspective(imageA, H,
-			(imageA.shape[1] + imageB.shape[1], imageA.shape[0]))
+			(imageA.shape[1] + imageB.shape[1], imageA.shape[0]))	
 		
-		cv2.imshow("imgAwarped",result)
-		cv2.imshow("imga", imageA)
-		cv2.imshow("imgb", imageB)
-		cv2.waitKey();cv2.destroyAllWindows()		
-		
-		
+		print(imageA.shape)
+		print(imageB.shape)
+		print(result.shape)
 		for y in range(0,imageB.shape[0]):
 			for x in range(0, imageB.shape[1]):
 				if list(imageB[y][x]) != [0,0,0]:
