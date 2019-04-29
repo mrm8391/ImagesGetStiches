@@ -2,7 +2,7 @@
 # python stitch.py --first images/bryce_left_01.png --second images/bryce_right_01.png 
 
 # import the necessary packages
-import panorama as stitcher
+import imgstitcher
 import argparse
 import imutils
 import cv2
@@ -28,7 +28,7 @@ imageA = imutils.resize(imageA, width=400)
 imageB = imutils.resize(imageB, width=400)
 
 # stitch the images together to create a panorama
-result = stitcher.stitch([imageA, imageB])
+result = imgstitcher.stitch([imageA, imageB])
 
 # show the images
 cv2.imshow("Image A", imageA)
