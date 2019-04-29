@@ -1,3 +1,6 @@
+'''
+Utility functions for modifying images
+'''
 
 import cv2
 
@@ -9,7 +12,10 @@ def padImage(img, amount):
 	return cv2.copyMakeBorder(img, amount, amount, amount, amount, cv2.BORDER_CONSTANT, value=[0,0,0])
 
 '''
-Remove invisible pixels from borders around image
+Remove invisible pixels from borders around image.
+
+NOTE: Done horribly, horribly inefficiently. Had very poor luck trying to get the
+optimal approach for this to work, so this is basically a brute force method.
 '''
 def trimImage(img):
 	leftBorder = 0

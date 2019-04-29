@@ -1,3 +1,20 @@
+'''
+Script for  stitching together two images.
+Intended for stitching images together in a mosaic, but can also theoretically 
+be used for a panorama.
+
+Depends on opencv 3, and imutils packages
+
+Usage: python -f <first image path> -s <second image path> -o <output image path>
+
+Partial code credit goes to the tutorial at this url
+https://www.pyimagesearch.com/2016/01/11/opencv-panorama-stitching/
+
+The basic logic and library calls come from this tutorial, but we have also
+made significant changes to get performance to work as we expect it to.
+'''
+# 
+
 # USAGE
 # python stitch.py --first images/bryce_left_01.png --second images/bryce_right_01.png 
 
@@ -11,11 +28,11 @@ import numpy as np
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-f", "--first", required=True,
-	help="path to the first image")
+	help="first image")
 ap.add_argument("-s", "--second", required=True,
-	help="path to the second image")
+	help="second image")
 ap.add_argument("-o", "--output", required=True,
-	help="output image name")
+	help="output image")
 args = vars(ap.parse_args())
 
 # load the two images and resize them to have a width of 400 pixels

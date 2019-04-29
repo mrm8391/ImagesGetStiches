@@ -1,10 +1,17 @@
-# import the necessary packages
+'''
+Core logic for image stitching.
+'''
+
+
 import numpy as np
 import imutils
 import cv2
 
 import imgutils
 
+'''
+Get features for the image
+'''
 def detectAndDescribe(image):
 	# convert the image to grayscale
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -20,6 +27,9 @@ def detectAndDescribe(image):
 	# return a tuple of keypoints and features
 	return (kps, features)
 
+'''
+Match features between two images, and compute the homography
+'''
 def matchKeypoints(kpsA, kpsB, featuresA, featuresB,
 	ratio, reprojThresh):
 	# compute the raw matches and initialize the list of actual
@@ -53,6 +63,9 @@ def matchKeypoints(kpsA, kpsB, featuresA, featuresB,
 	return None
 
 
+'''
+Kick off all the stitching work, finding and matching features as well.
+'''
 def stitch(images, ratio=0.75, reprojThresh=4.0):
 	# unpack the images, then detect keypoints and extract
 	# local invariant descriptors from them
