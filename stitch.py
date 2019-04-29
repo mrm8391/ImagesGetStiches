@@ -25,21 +25,20 @@ import imutils
 import cv2
 import numpy as np
 
-# construct the argument parse and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-f", "--first", required=True,
-	help="first image")
-ap.add_argument("-s", "--second", required=True,
-	help="second image")
-ap.add_argument("-o", "--output", required=True,
-	help="output image")
-args = vars(ap.parse_args())
+import sys
+
+if len(sys.argv) != 4:
+	print("usage: python3 stitch.py <input 1> <input 2> <output>")
+	sys.exit(1)
+
+input = sys.argv[1]
+input2 = sys.argv[2]
+output = sys.argv[3]
 
 # load the two images and resize them to have a width of 400 pixels
 # (for faster processing)
-imageA = cv2.imread(args["first"])
-imageB = cv2.imread(args["second"])
-output = args["output"]
+imageA = cv2.imread(input)
+imageB = cv2.imread(input2)
 
 imageA = imutils.resize(imageA, width=400)
 imageB = imutils.resize(imageB, width=400)
